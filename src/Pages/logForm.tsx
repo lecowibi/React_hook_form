@@ -20,7 +20,9 @@ const Login = () => {
                 return;
             }
             alert("Login Successful");
-            navigate("/home");
+navigate(`/home/${res.data[0].id}`);
+
+            
         }
         catch (error) {
             console.log("Couldn't fetch the details", error);
