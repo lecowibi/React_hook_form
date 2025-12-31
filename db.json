@@ -1,5 +1,34 @@
 {
   "users": [
-    
+    {
+      "id": "2e1a",
+      "Name": "bishal",
+      "email": "tbishal0088@gmail.com",
+      "age": "20",
+      "password": "bishal123",
+      "gender": "male",
+      "country": "Nepal",
+      "terms": true
+    },
+    {
+      "id": "097d",
+      "Name": "surya",
+      "email": "suryatmg@gmail.com",
+      "age": "32",
+      "password": "surya123",
+      "gender": "female",
+      "country": "India",
+      "terms": true
+    },
+    {
+      "id": "24a7",
+      "Name": "bishal",
+      "email": "tbishal0099@gmail.com",
+      "age": "20",
+      "password": "bishal123",
+      "gender": "male",
+      "country": "Nepal",
+      "terms": true
+    }
   ]
 }
