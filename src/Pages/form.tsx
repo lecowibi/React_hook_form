@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools"
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
 type FormType = {
   Name: string,
   email: string,
@@ -14,8 +16,9 @@ type FormType = {
 };
 
 const Form = () => {
-  const { register, control, handleSubmit, formState, watch, reset, setError } = useForm<FormType>();
+  const { register, control, handleSubmit, formState, watch, setError } = useForm<FormType>();
   const { errors } = formState
+  const navigate=useNavigate();
 
 
   const [info, setInfo] = useState<FormType>({
@@ -37,10 +40,11 @@ const Form = () => {
         setError("email", { type: "manual", message: "Email already exist" });
         return;
       }
-
       const res = await axios.post('http://localhost:3000/users', payload);
       setInfo(res.data);
-      reset();
+      alert("form created successfully");
+      navigate("login");
+      
     }
 
     catch (error) {
@@ -166,7 +170,9 @@ const Form = () => {
 
           <p className="text-red-700">{errors.terms?.message}</p>
 
-          <button className="p-2 bg-black text-white text-xl w-30 rounded-lg" type="submit">Submit</button>
+          <button className="p-2 bg-black text-white text-xl w-50 m-auto rounded-lg" type="submit">Submit</button>
+          <p className="text-sm text-center">Already have an account? <Link to='/login' className="text-blue-700">Login</Link></p>
+
 
         </form>
         <DevTool control={control} />

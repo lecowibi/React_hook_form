@@ -29,6 +29,26 @@
       "gender": "male",
       "country": "Nepal",
       "terms": true
+    },
+    {
+      "id": "277c",
+      "Name": "bishal",
+      "email": "tbishal008@gmail.com",
+      "age": "23",
+      "password": "bishal123",
+      "gender": "male",
+      "country": "Nepal",
+      "terms": true
+    },
+    {
+      "id": "f4d2",
+      "Name": "bishal",
+      "email": "bishalsurya@gmail.com",
+      "age": "20",
+      "password": "bishal123",
+      "gender": "female",
+      "country": "India",
+      "terms": true
     }
   ]
 }
