@@ -49,6 +49,16 @@
       "gender": "female",
       "country": "India",
       "terms": true
+    },
+    {
+      "id": "14a5",
+      "Name": "bishal",
+      "email": "tbishal88@gmail.com",
+      "age": "23",
+      "password": "Bishal123",
+      "gender": "male",
+      "country": "Nepal",
+      "terms": true
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 
 type logType = {
     email: string,
@@ -11,6 +12,8 @@ const Login = () => {
     const { register, handleSubmit, setError, formState } = useForm<logType>();
     const { errors } = formState
     const navigate = useNavigate()
+
+    const [togglePassword,setTogglePassword]=useState(true);
 
     const onSubmit = async (data: logType) => {
         try {
@@ -56,7 +59,8 @@ navigate(`/home/${res.data[0].id}`);
 
 
                     <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="john123" className="border-2 outline-0 p-1.5 border-black" id="password" {...register("password", {
+                   <div className="flex justify-between p-1.5 border-2 outline-0 border-black">
+                     <input type={togglePassword?"password":"text"} placeholder="john123" className="w-full outline-0" id="password" {...register("password", {
                         required: "Password is required", min: {
                             value: 6,
                             message: "Password must be more than 6 letter"
@@ -65,6 +69,8 @@ navigate(`/home/${res.data[0].id}`);
                             message: "Password shouldn't contain special case"
                         }
                     })} />
+                    <p className="cursor-pointer select-none" onClick={()=>setTogglePassword(!togglePassword)}>Show</p>
+                   </div>
                     <p className="text-red-700">{errors.password?.message}</p>
 
 

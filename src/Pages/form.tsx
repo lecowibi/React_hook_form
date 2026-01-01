@@ -20,17 +20,8 @@ const Form = () => {
   const { errors } = formState
   const navigate=useNavigate();
 
+const [togglePassword,setTogglePassword]=useState(true)
 
-  const [info, setInfo] = useState<FormType>({
-    Name: "",
-    email: "",
-    age: "",
-    password: "",
-    cpassword: "",
-    gender: "",
-    country: "",
-    terms: false
-  });
   const onSubmit = async (data: FormType) => {
 
     const { cpassword, ...payload } = data;
@@ -40,8 +31,8 @@ const Form = () => {
         setError("email", { type: "manual", message: "Email already exist" });
         return;
       }
-      const res = await axios.post('http://localhost:3000/users', payload);
-      setInfo(res.data);
+       await axios.post('http://localhost:3000/users', payload);
+      
       alert("form created successfully");
       navigate("login");
       
@@ -102,8 +93,11 @@ const Form = () => {
           })} />
           <p className="text-red-700">{errors.age?.message}</p>
 
-          <label htmlFor="password">Password</label>
-          <input type="password" placeholder="john123" className="border-2 outline-0 p-1.5 border-black" id="password" {...register("password", {
+
+<label htmlFor="password">Password</label>
+        <div className="border-2  flex justify-between p-1.5 border-black">
+            
+          <input type={togglePassword?"password":"text"} placeholder="john123" className="outline-0 w-full  " id="password" {...register("password", {
             required: "Password is required", min: {
               value: 6,
               message: "Password must be more than 6 letter"
@@ -112,11 +106,13 @@ const Form = () => {
               message: "Password shouldn't contain special case"
             }
           })} />
+          <p className="hover:cursor-pointer select-none" onClick={()=>setTogglePassword(!togglePassword)}>show</p>
+        </div>
           <p className="text-red-700">{errors.password?.message}</p>
           <label htmlFor="cpassword">Confirm Password</label>
 
           <input
-            type="password"
+            type={togglePassword?"password":"text"}
             placeholder="john123"
             className="border-2 outline-0 p-1.5 border-black"
             id="cpassword"
@@ -177,15 +173,7 @@ const Form = () => {
         </form>
         <DevTool control={control} />
       </div>
-      <div className="w-lg rounded-2xl p-10 m-auto mt-10 bg-white border-2 border-black flex justify-center items-center flex-col gap-3 text-md ">
-        <h1 className="font-bold text-xl">You Submitted</h1>
-        <p className="mt-5 text-left w-full"><span className="font-bold">Name: </span>{info.Name}</p>
-        <p className=" text-left w-full"><span className="font-bold">Email: </span>{info.email}</p>
-        <p className=" text-left w-full"><span className="font-bold">Age: </span>{info.age}</p>
-        <p className="text-left w-full"><span className="font-bold">Password: </span> {info.password}</p>
-        <p className="text-left w-full"><span className="font-bold">Gender: </span> {info.gender}</p>
-        <p className="text-left w-full"><span className="font-bold">Country: </span> {info.country}</p>
-      </div></>
+   </>
   )
 }
 
