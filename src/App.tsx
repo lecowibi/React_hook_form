@@ -2,7 +2,8 @@ import Form from './Pages/form'
 import './App.css'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import Login from './Pages/logForm'
-import Home from './Pages/Home'
+import AddCart from './Pages/AddCart'
+import Cart from './Pages/cart'
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
     <Routes>
       <Route path='/' element= {<Form/>} />
       <Route path='/login' element= {<Login/>} />
-      <Route path='/home/:id' element= {<Home/>} />
+      <Route path='/home/:id' element= {<AddCart/>} />
+      <Route path='/cart/:id' element= {<Cart/>} />
     </Routes>
     </BrowserRouter>
       

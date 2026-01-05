@@ -160,7 +160,7 @@ const [togglePassword,setTogglePassword]=useState(true)
 
 
           <div className="flex gap-2">
-            <input type="checkbox" {...register("terms", { required: true })} />
+            <input type="checkbox" {...register("terms", { required: "Terms and condition required" })} />
             <span>Accept terms and condition</span>
           </div>
 
