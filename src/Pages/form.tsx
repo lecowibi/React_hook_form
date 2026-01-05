@@ -1,48 +1,45 @@
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
 import { DevTool } from "@hookform/devtools"
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../app/hook"
+import { registerUser } from "../feature/auth/authSlice"
 
-type FormType = {
-  Name: string,
-  email: string,
-  password: string,
-  cpassword: string,
-  age: string | number,
-  gender: string,
-  country: string,
+type FormType= {
+  Name: string
+  email: string
+  age: number
+  password: string
+  cpassword: string
+  gender: "male" | "female"
+  country: string
   terms: boolean
-};
+}
 
 const Form = () => {
-  const { register, control, handleSubmit, formState, watch, setError } = useForm<FormType>();
+  const { register, control, handleSubmit, formState, watch, setError } =
+    useForm<FormType>()
   const { errors } = formState
-  const navigate=useNavigate();
 
-const [togglePassword,setTogglePassword]=useState(true)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const {  error, user } = useAppSelector((state) => state.auth)
 
-  const onSubmit = async (data: FormType) => {
+  const [togglePassword, setTogglePassword] = useState(true)
 
-    const { cpassword, ...payload } = data;
-    try {
-      const checkres = await axios.get(`http://localhost:3000/users?email=${data.email}`);
-      if (checkres.data.length > 0) {
-        setError("email", { type: "manual", message: "Email already exist" });
-        return;
-      }
-       await axios.post('http://localhost:3000/users', payload);
-      
-      alert("form created successfully");
-      navigate("login");
-      
-    }
-
-    catch (error) {
-      console.log("Couldn't post error", error)
-    }
+  const onSubmit = (data: FormType) => {
+    const { cpassword, ...payload } = data
+    dispatch(registerUser(payload))
   }
 
+  useEffect(() => {
+    if (error) {
+      setError("email", { message: error })
+    }
+    if (user) {
+      navigate("/login")
+    }
+  }, [error, user, navigate, setError])
 
 
 
@@ -160,7 +157,7 @@ const [togglePassword,setTogglePassword]=useState(true)
 
 
           <div className="flex gap-2">
-            <input type="checkbox" {...register("terms", { required: "Terms and condition required" })} />
+            <input type="checkbox" {...register("terms", { required: true })} />
             <span>Accept terms and condition</span>
           </div>
 
