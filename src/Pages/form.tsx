@@ -30,15 +30,15 @@ const Form = () => {
   const onSubmit = (data: FormType) => {
     const { cpassword, ...payload } = data
     dispatch(registerUser(payload))
+    alert("Created successfully")
+    
   }
 
   useEffect(() => {
     if (error) {
       setError("email", { message: error })
     }
-    if (user) {
-      navigate("/login")
-    }
+    
   }, [error, user, navigate, setError])
 
 

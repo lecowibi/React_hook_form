@@ -33,6 +33,13 @@ export const fetchProducts = createAsyncThunk(
     })) as Product[]
   }
 )
+export const deleteProducts = createAsyncThunk(
+  "products/deleteProducts",
+  async (id) => {
+    await axios.delete(`https://fakestoreapi.com/products/${id}`)
+    return id
+  }
+)
 
 const productsSlice = createSlice({
   name: "products",
